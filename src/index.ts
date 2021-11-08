@@ -1,2 +1,4 @@
 #! /usr/bin/env node
-console.log('console.log output');
+import shell from 'shelljs';
+
+shell.exec('echo shell.exec works');

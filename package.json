@@ -1,56 +1,25 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.4",
   "license": "MIT",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "bin": "dist/index.js",
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
+    "start": "node dist/index",
+    "build": "rimraf ./build && tsc",
+    "prepare": "rimraf ./build && tsc",
+    "clean": "rimraf ./build"
   },
   "name": "@dinels/desition-cli",
   "author": "dinels",
-  "module": "dist/desition-cli.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/desition-cli.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/desition-cli.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^6.0.4",
-    "husky": "^7.0.4",
-    "size-limit": "^6.0.4",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
+    "@types/shelljs": "^0.8.9",
     "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2",
+    "shelljs": "^0.8.4"
   }
 }
