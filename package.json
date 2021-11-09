@@ -11,8 +11,8 @@
     "dev": "ts-node src/index.ts",
     "build": "yarn clean && tsc",
     "prepare": "yarn clean && tsc",
-    "clean": "rimraf ./dist && rimraf ./test/app && rimraf ./test/config/routes.ts",
-    "generate": "ts-node test/generate-files.ts"
+    "clean": "rimraf ./dist && rimraf ./src2/app && rimraf ./src2/config/routes.ts",
+    "generate": "ts-node src2/generate-files.ts"
   },
   "name": "@dinels/desition-cli",
   "author": "dinels",
