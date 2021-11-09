@@ -7,7 +7,7 @@ import { generateFiles } from "./lib/generateFiles";
 
 let config = {
   outputDir: "./",
-  apiVersion: "/v1",
+  apiVersion: "v1",
 };
 
 const handleConfig = async () => {
