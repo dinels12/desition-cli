@@ -1,11 +1,11 @@
 const data = {
-  helper: `import { NAMELModel } from '../../../../models';
+  helper: `import { NAMELModel } from '../../../../../models';
 
 export const genNAMEUs = () => {
   console.log('NAMELs []');
 };`,
   controller: `import { Request, Response } from "express";
-import { NAMELModel } from "../../../models";
+import { NAMELModel } from "../../../../models";
 
 export const getNAMEUs = async (req: Request, res: Response) => {
   const NAMELs = await NAMELModel.find();
