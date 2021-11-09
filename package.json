@@ -11,7 +11,7 @@
     "dev": "ts-node src/index.ts",
     "build": "rimraf ./dist && tsc",
     "prepare": "rimraf ./dist && tsc",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist && rimraf ./src/app"
   },
   "name": "@dinels/desition-cli",
   "author": "dinels",

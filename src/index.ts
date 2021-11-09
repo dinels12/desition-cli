@@ -2,15 +2,24 @@
 
 import inquirer from "inquirer";
 import shell from "shelljs";
+import fs from "fs/promises";
+import { generateFiles } from "./lib/generateFiles";
 
+let config = {
+  outputDir: "./",
+};
 const handleConfig = async () => {
-  const finded = shell.find("./desition.config.json")[0];
+  const fileName = "./desition.config.json";
+  const finded = shell.find(fileName)[0];
   const regex = /desition|config|json/;
 
-  if (regex.test(finded)) console.log(finded);
+  if (regex.test(finded)) {
+    const data = await fs.readFile(finded, "utf8");
+    config = JSON.parse(data);
+  } else {
+    await fs.writeFile(fileName, JSON.stringify(config));
+  }
 };
-
-handleConfig();
 
 enum Commands {
   Create = "Create new api module",
@@ -26,22 +35,24 @@ async function promptCreate(): Promise<void> {
   })) as any;
   if (answers["create"] !== "") {
     const name = answers["create"];
-
-    // shell.mkdir(name);
-
-    console.log(answers["create"]);
+    const { outputDir } = config;
+    const result = outputDir + `${name}`;
+    await generateFiles(result, name);
   }
   promptUser();
 }
 
 async function promptUser(): Promise<void> {
-  // console.clear();
+  await handleConfig();
+  console.clear();
+
   const answers = (await inquirer.prompt({
     type: "list",
     name: "command",
     message: "Choose option",
     choices: Object.values(Commands),
   })) as any;
+
   switch (answers["command"]) {
     case Commands.Create:
       promptCreate();
