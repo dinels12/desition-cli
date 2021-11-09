@@ -21,7 +21,11 @@ const getSingularNameUpperCase = (name: string) => {
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 };
 
-export const generateFiles = async (outputDir: string, name: string) => {
+export const generateFiles = async (
+  outputDir: string,
+  name: string,
+  apiVersion: string
+) => {
   return await new Promise(async (resolve, reject) => {
     let files = [
       "/controllers",
@@ -46,6 +50,7 @@ export const generateFiles = async (outputDir: string, name: string) => {
         item
           .replace(/NAMEL/g, singularName)
           .replace(/NAMEU/g, getSingularNameUpperCase(singularName))
+          .replace(/APIVERSION/g, apiVersion)
       );
     });
     resolve("done");

@@ -7,6 +7,7 @@ import { generateFiles } from "./lib/generateFiles";
 
 let config = {
   outputDir: "./",
+  apiVersion: "v1",
 };
 
 const handleConfig = async () => {
@@ -36,11 +37,14 @@ async function promptCreate(): Promise<void> {
   })) as any;
   if (answers["create"] !== "") {
     const name = answers["create"];
-    const { outputDir } = config;
+    const { outputDir, apiVersion } = config;
     const result = outputDir + `${name}`;
     const finded = shell.find(result)[0];
     if (!finded) {
-      await generateFiles(result, name);
+      console.log("wait a sec. we are generating new api module");
+      await generateFiles(result, name, apiVersion);
+    } else {
+      console.log("The module already exists");
     }
   }
   promptUser();
@@ -48,7 +52,7 @@ async function promptCreate(): Promise<void> {
 
 async function promptUser(): Promise<void> {
   await handleConfig();
-  // console.clear();
+  console.clear();
 
   const answers = (await inquirer.prompt({
     type: "list",

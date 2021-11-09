@@ -41,10 +41,13 @@ import * as NAMELController from "../controllers/NAMEL.controller";
 // import * as NAMELHelper  from "../controllers/helpers/NAMEL.helper";
 // import * as sessionAuth  from "../../../../config/sessionAuth";
 
-module.exports = (router: IRouter) => {
+module.exports = (router: IRouter, version: string) => {
   const moduleName = "/NAMELs";
+  const route = "APIVERSION/NAMELs";
 
-  router.get(moduleName, NAMELController.getNAMEUs);
+  if (version === "/v1") {
+    router.get(route, NAMELController.getNAMEUs);
+  }
 };`,
 };
 

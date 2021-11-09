@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node dist/index",
     "dev": "ts-node src/index.ts",
-    "build": "rimraf ./dist && tsc",
-    "prepare": "rimraf ./dist && tsc",
+    "build": "yarn clean && tsc",
+    "prepare": "yarn clean && tsc",
     "clean": "rimraf ./dist && rimraf ./src/app",
     "generate": "ts-node src/generate-files.ts"
   },

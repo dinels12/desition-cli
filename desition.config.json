@@ -1,1 +1,1 @@
-{ "outputDir": "./src/app/api/" }
+{ "outputDir": "./src/app/api/", "apiVersion": "/v1" }
