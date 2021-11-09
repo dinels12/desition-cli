@@ -8,11 +8,11 @@ import { generateFiles } from "./lib/generateFiles";
 let config = {
   outputDir: "./",
 };
+
 const handleConfig = async () => {
   const fileName = "./desition.config.json";
   const finded = shell.find(fileName)[0];
   const regex = /desition|config|json/;
-
   if (regex.test(finded)) {
     const data = await fs.readFile(finded, "utf8");
     config = JSON.parse(data);
@@ -23,6 +23,7 @@ const handleConfig = async () => {
 
 enum Commands {
   Create = "Create new api module",
+  Generate = "Generate the Interfaces and Models",
   Quit = "Quit",
 }
 
@@ -37,14 +38,17 @@ async function promptCreate(): Promise<void> {
     const name = answers["create"];
     const { outputDir } = config;
     const result = outputDir + `${name}`;
-    await generateFiles(result, name);
+    const finded = shell.find(result)[0];
+    if (!finded) {
+      await generateFiles(result, name);
+    }
   }
   promptUser();
 }
 
 async function promptUser(): Promise<void> {
   await handleConfig();
-  console.clear();
+  // console.clear();
 
   const answers = (await inquirer.prompt({
     type: "list",
@@ -56,6 +60,9 @@ async function promptUser(): Promise<void> {
   switch (answers["command"]) {
     case Commands.Create:
       promptCreate();
+      break;
+    case Commands.Generate:
+      shell.exec("yarn generate");
       break;
     case Commands.Quit:
       break;
