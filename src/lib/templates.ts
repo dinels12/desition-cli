@@ -35,20 +35,20 @@ NAMELSchema.plugin(uniqueValidator, {
 });
 
 export default model<INAMEU & Document>("NAMEL", NAMELSchema);`,
-  routes: `import { IRouter } from "express";
+  routes: `import { Router } from "express";
 import * as NAMELController from "../controllers/NAMEL.controller";
 // import * as NAMELMiddleWare  from "../middlewares/NAMEL.middleware";
 // import * as NAMELHelper  from "../controllers/helpers/NAMEL.helper";
 // import * as sessionAuth  from "../../../../config/sessionAuth";
 
-module.exports = (router: IRouter, version: string) => {
-  const moduleName = "/NAMELs";
-  const route = "APIVERSION/NAMELs";
+const router = Router();
+// const moduleName = "/NAMELs";
+const route = "/APIVERSION/NAMELs";
 
-  if (version === "/v1") {
-    router.get(route, NAMELController.getNAMEUs);
-  }
-};`,
+router.get(route, NAMELController.getNAMEUs);
+
+export default router;  
+`,
 };
 
 export default data;

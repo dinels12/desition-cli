@@ -7,7 +7,7 @@ import { generateFiles } from "./lib/generateFiles";
 
 let config = {
   outputDir: "./",
-  apiVersion: "v1",
+  apiVersion: "/v1",
 };
 
 const handleConfig = async () => {
@@ -38,7 +38,7 @@ async function promptCreate(): Promise<void> {
   if (answers["create"] !== "") {
     const name = answers["create"];
     const { outputDir, apiVersion } = config;
-    const result = outputDir + `${name}`;
+    const result = outputDir + `/${apiVersion}/${name}`;
     const finded = shell.find(result)[0];
     if (!finded) {
       console.log("wait a sec. we are generating new api module");
